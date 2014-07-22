@@ -14,5 +14,8 @@ gulp.task 'scripts', ->
 
 gulp.task 'clean', require('del').bind null, ['dist']
 
+gulp.task 'serve', ->
+  gulp.watch paths.scripts, ['scripts']
+
 gulp.task 'default', ['clean'], ->
-  gulp.start 'scripts'
+  gulp.start 'serve'
