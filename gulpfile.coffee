@@ -2,8 +2,6 @@ gulp = require 'gulp'
 
 $ = require('gulp-load-plugins')()
 
-name = require('./package.json').name
-
 paths =
   scripts: ['*.coffee', '!gulpfile.coffee']
 
