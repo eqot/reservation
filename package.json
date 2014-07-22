@@ -1,0 +1,16 @@
+{
+  "name": "reservation",
+  "version": "0.0.0",
+  "description": "",
+  "main": "code.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eqot/reservation.git"
+  },
+  "author": "Ikuo Terado",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eqot/reservation/issues"
+  },
+  "homepage": "https://github.com/eqot/reservation"
+}
