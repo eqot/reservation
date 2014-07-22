@@ -1,0 +1,24 @@
+{
+  "name": "reservation",
+  "version": "0.0.0",
+  "description": "",
+  "main": "code.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eqot/reservation.git"
+  },
+  "author": "Ikuo Terado",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eqot/reservation/issues"
+  },
+  "homepage": "https://github.com/eqot/reservation",
+  "devDependencies": {
+    "coffee-script": "^1.7.1",
+    "del": "^0.1.1",
+    "gulp": "^3.8.6",
+    "gulp-coffee": "^2.1.1",
+    "gulp-load-plugins": "^0.5.3",
+    "gulp-replace": "^0.4.0"
+  }
+}
