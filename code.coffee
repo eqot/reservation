@@ -1,3 +1,3 @@
 'use strict'
 
-console.log 'ok'
+console.log '__ID__'
