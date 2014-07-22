@@ -1,0 +1,18 @@
+gulp = require 'gulp'
+
+$ = require('gulp-load-plugins')()
+
+name = require('./package.json').name
+
+paths =
+  scripts: ['*.coffee', '!gulpfile.coffee']
+
+gulp.task 'scripts', ->
+  return gulp.src paths.scripts
+    .pipe $.coffee({bare: true})
+    .pipe gulp.dest('dist')
+
+gulp.task 'clean', require('del').bind null, ['dist']
+
+gulp.task 'default', ['clean'], ->
+  gulp.start 'scripts'
