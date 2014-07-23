@@ -1,4 +1,5 @@
 gulp = require 'gulp'
+gutil = require 'gulp-util'
 fs = require 'fs'
 
 $ = require('gulp-load-plugins')()
@@ -8,7 +9,7 @@ paths =
 
 gulp.task 'scripts', ->
   return gulp.src paths.scripts
-    .pipe $.coffee({bare: true})
+    .pipe($.coffee({bare: true}).on('error', gutil.log))
     .pipe $.replace '__ID__', ->
       return  (fs.readFileSync '.secret').toString().trim()
     .pipe gulp.dest('dist')
