@@ -1,28 +1,6 @@
 <div>
   <script>
-    function doAction(event) {
-      var param = new Object();
-      var d = document.querySelector('#date').value;
-      var dstr = new Date(d).toString();
-
-      param['date'] = dstr;
-      param['user'] = document.querySelector('#user').value;
-      param['mail'] = document.querySelector('#mail').value;
-
-      google.script.run.withSuccessHandler(onSuccess)
-      .withFailureHandler(onFailure) .checkData(param);
-
-      document.querySelector('#msg').textContent = '……問い合わせ中……';
-    }
-
-    function onSuccess(result){
-      document.querySelector('#msg').textContent = result;
-    }
-
-    function onFailure(error) {
-      alert(error.message);
-      document.querySelector('#msg').textContent = '';
-    }
+__SCRIPT__
   </script>
 
   <p id="msg">必ず全項目を入力してください。</p>
@@ -30,9 +8,43 @@
   <form>
     <table>
       <tr><td>日付：</td><td><input type="date" id="date" name="date" value=""></td></tr>
-      <tr><td>利用者名：</td><td><input type="text" id="user" name="user"></td></tr>
+      <tr>
+        <td>時間：</td>
+        <td>
+          <input type="time" id="time_s" name="time_s" value="" list="timelist"> 〜
+          <input type="time" id="time_e" name="time_e" value="" list="timelist">
+        </td>
+      </tr>
+      <tr><td>氏名：</td><td><input type="text" id="name" name="name"></td></tr>
       <tr><td>メールアドレス：</td><td><input type="text" id="mail" name="mail"></td></tr>
-      <tr><td></td><td><input type="button" onclick="doAction(e);" value="予約する"></td></tr>
+      <tr><td></td><td><input type="button" onclick="doAction(e)" value="予約する"></td></tr>
     </table>
   </form>
+
+  <datalist id="timelist">
+    <option value="00:00"></option>
+    <option value="01:00"></option>
+    <option value="02:00"></option>
+    <option value="03:00"></option>
+    <option value="04:00"></option>
+    <option value="05:00"></option>
+    <option value="06:00"></option>
+    <option value="07:00"></option>
+    <option value="08:00"></option>
+    <option value="09:00"></option>
+    <option value="10:00"></option>
+    <option value="11:00"></option>
+    <option value="12:00"></option>
+    <option value="13:00"></option>
+    <option value="14:00"></option>
+    <option value="15:00"></option>
+    <option value="16:00"></option>
+    <option value="17:00"></option>
+    <option value="18:00"></option>
+    <option value="19:00"></option>
+    <option value="20:00"></option>
+    <option value="21:00"></option>
+    <option value="22:00"></option>
+    <option value="23:00"></option>
+  </datalist>
 </div>
