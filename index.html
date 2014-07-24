@@ -1,23 +1,19 @@
 <div>
-  <script>
-__SCRIPT__
-  </script>
-
   <p id="msg">必ず全項目を入力してください。</p>
 
   <form>
     <table>
-      <tr><td>日付：</td><td><input type="date" id="date" name="date" value=""></td></tr>
+      <tr><td>日付：</td><td><input type="date" id="date" name="date" value="" required></td></tr>
       <tr>
         <td>時間：</td>
         <td>
-          <input type="time" id="time_s" name="time_s" value="" list="timelist"> 〜
-          <input type="time" id="time_e" name="time_e" value="" list="timelist">
+          <input type="time" id="time_s" name="time_s" value="" list="timelist" required> 〜
+          <input type="time" id="time_e" name="time_e" value="" list="timelist" required>
         </td>
       </tr>
-      <tr><td>氏名：</td><td><input type="text" id="name" name="name"></td></tr>
-      <tr><td>メールアドレス：</td><td><input type="text" id="mail" name="mail"></td></tr>
-      <tr><td></td><td><input type="button" onclick="doAction(e)" value="予約する"></td></tr>
+      <tr><td>氏名：</td><td><input type="text" id="name" name="name" required></td></tr>
+      <tr><td>メールアドレス：</td><td><input type="text" id="mail" name="mail" required></td></tr>
+      <tr><td></td><td><input type="submit" onclick="doAction(e)" value="予約する"></td></tr>
     </table>
   </form>
 
@@ -47,4 +43,8 @@ __SCRIPT__
     <option value="22:00"></option>
     <option value="23:00"></option>
   </datalist>
+
+  <script>
+__SCRIPT__
+  </script>
 </div>

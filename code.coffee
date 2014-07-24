@@ -3,7 +3,7 @@ doGet = (e) ->
 
 checkData = (frm) ->
   mail = frm['mail']
-  user1 = frm['user']
+  user1 = frm['name']
   date1 = new Date(frm['date'])
 
   Logger.log(date1)
