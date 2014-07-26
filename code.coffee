@@ -5,6 +5,8 @@ checkData = (frm) ->
   mail = frm['mail']
   name = frm['name']
   date = new Date(frm['date'])
+  time_s = new Date(frm['time_s'])
+  time_e = new Date(frm['time_e'])
 
   # Logger.log(date)
 
@@ -19,10 +21,8 @@ checkData = (frm) ->
     if frmdaystr is evtdaystr
       return '申し訳ありません。その日は既に予約済みです。'
 
-  cal.createAllDayEvent name, date,
+  cal.createEvent name, time_s, time_e,
     description: "#{name} (#{mail})"
     guests: mail
 
-  result = date.getYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + '日に予約しました。（ブラウザーをリロードすると、カレンダーが更新されます）'
-
-  return result
+  return = date.getYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + '日に予約しました。（ブラウザーをリロードすると、カレンダーが更新されます）'

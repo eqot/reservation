@@ -20,8 +20,8 @@ doAction = (event) ->
   time_e.setHours params.time_e.substr 0, 2
   time_e.setMinutes params.time_e.substr 3, 2
 
-  params.time_s = time_s
-  params.time_e = time_e
+  params.time_s = time_s.toString()
+  params.time_e = time_e.toString()
 
   for key of params
     console.log "#{key}, #{params[key]}"
