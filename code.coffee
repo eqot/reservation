@@ -25,4 +25,4 @@ checkData = (frm) ->
     description: "#{name} (#{mail})"
     guests: mail
 
-  return = date.getYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + '日に予約しました。（ブラウザーをリロードすると、カレンダーが更新されます）'
+  return = '予約しました。(ブラウザーをリロードすると、カレンダーが更新されます)'
