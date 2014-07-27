@@ -53,8 +53,8 @@ initialize = ->
   h = fillZero(date.getHours() + 2)
   document.querySelector('#time_e').value = "#{h}:#{m}"
 
-  document.querySelector('#name').value = 'Just Test'
-  document.querySelector('#mail').value = 'foo@bar.com'
+  # document.querySelector('#name').value = 'Just Test'
+  # document.querySelector('#mail').value = 'foo@bar.com'
 
   timelist = document.querySelector '#timelist'
   for hour in [7..23]
