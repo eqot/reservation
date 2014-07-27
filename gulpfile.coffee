@@ -11,9 +11,10 @@ paths =
 gulp.task 'scripts', ->
   return gulp.src paths.scripts
     .pipe($.coffee({bare: true}).on('error', gutil.log))
+    .pipe gulp.dest('dist')
     .pipe $.replace '__ID__', ->
       return  (fs.readFileSync '.secret').toString().trim()
-    .pipe gulp.dest('dist')
+    .pipe gulp.dest('dist/secret')
 
 gulp.task 'html', ['scripts'], ->
   return gulp.src paths.html
