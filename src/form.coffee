@@ -20,8 +20,8 @@ doAction = (event) ->
   params.time_s = time_s.toString()
   params.time_e = time_e.toString()
 
-  for key of params
-    console.log "#{key}, #{params[key]}"
+  # for key of params
+  #   console.log "#{key}, #{params[key]}"
 
   resources = document.querySelector '#resource'
   index = resources.selectedIndex
