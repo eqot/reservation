@@ -4,18 +4,16 @@ doGet = (e) ->
 checkData = (form) ->
   name = form.name
   mail = form.mail
-  date = new Date form.date
   time_s = new Date form.time_s
   time_e = new Date form.time_e
   resource = form.resource
 
-  # Logger.log(date)
-
   cal = CalendarApp.getCalendarById('__ID__')
 
   events = cal.getEvents time_s, time_e
-  if events.length > 0
-    return '先約があるため、予約できませんでした。'
+  for event in events
+    if event.getTitle() is resource
+      return '先約があるため、予約できませんでした。'
 
   cal.createEvent resource, time_s, time_e,
     description: "#{name} (#{mail})"
