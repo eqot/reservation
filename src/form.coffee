@@ -56,6 +56,12 @@ initialize = ->
   document.querySelector('#name').value = 'Just Test'
   document.querySelector('#mail').value = 'foo@bar.com'
 
+  timelist = document.querySelector '#timelist'
+  for hour in [7..23]
+    time = document.createElement 'option'
+    time.value = fillZero(hour) + ':00'
+    timelist.appendChild time
+
 fillZero = (value) ->
   return if value < 10 then '0' + value else value
 

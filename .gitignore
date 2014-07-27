@@ -1,3 +1,5 @@
-.secret
-dist
 node_modules
+.secret
+dist/
+!dist/index.html
+!dist/code.js

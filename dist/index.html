@@ -1,0 +1,118 @@
+<div>
+  <p id="msg">必ず全項目を入力してください。</p>
+
+  <form>
+    <table>
+      <tr><td>日付：</td><td><input type="date" id="date" name="date" value="" required></td></tr>
+      <tr>
+        <td>時間：</td>
+        <td>
+          <input type="time" id="time_s" name="time_s" value="" list="timelist" required> 〜
+          <input type="time" id="time_e" name="time_e" value="" list="timelist" required>
+        </td>
+      </tr>
+
+      <tr>
+        <td>リソース：</td>
+        <td>
+          <select id="resource" name="resource">
+            <optgroup label="カテゴリ 1">
+              <option>場所 1</option>
+              <option>場所 2</option>
+            </optgroup>
+            <optgroup label="カテゴリ 2">
+              <option>機材 1</option>
+              <option>機材 2</option>
+            </optgroup>
+          </select>
+        </td>
+      </tr>
+
+      <tr><td>氏名：</td><td><input type="text" id="name" name="name" required></td></tr>
+      <tr><td>メールアドレス：</td><td><input type="text" id="mail" name="mail" required></td></tr>
+      <tr><td></td><td><input type="submit" onclick="doAction(e)" value="予約する"></td></tr>
+    </table>
+  </form>
+
+  <datalist id="timelist"></datalist>
+
+  <script>
+var IDS, doAction, fillZero, initialize, onFailure, onSuccess;
+
+IDS = ['date', 'time_s', 'time_e', 'resource', 'name', 'mail'];
+
+doAction = function(event) {
+  var id, index, isFilled, key, params, resources, time_e, time_s, _i, _len;
+  isFilled = true;
+  params = {};
+  for (_i = 0, _len = IDS.length; _i < _len; _i++) {
+    id = IDS[_i];
+    params[id] = document.querySelector('#' + id).value;
+    if (params[id].length === 0) {
+      isFilled = false;
+    }
+  }
+  time_s = new Date(params.date);
+  time_s.setHours(params.time_s.substr(0, 2));
+  time_s.setMinutes(params.time_s.substr(3, 2));
+  time_e = new Date(params.date);
+  time_e.setHours(params.time_e.substr(0, 2));
+  time_e.setMinutes(params.time_e.substr(3, 2));
+  params.time_s = time_s.toString();
+  params.time_e = time_e.toString();
+  for (key in params) {
+    console.log("" + key + ", " + params[key]);
+  }
+  resources = document.querySelector('#resource');
+  index = resources.selectedIndex;
+  params.resource = resources.options[index].text;
+  if (isFilled) {
+    google.script.run.withSuccessHandler(onSuccess).withFailureHandler(onFailure).checkData(params);
+    return document.querySelector('#msg').textContent = '……問い合わせ中……';
+  }
+};
+
+onSuccess = function(result) {
+  return document.querySelector('#msg').textContent = result;
+};
+
+onFailure = function(error) {
+  alert(error.message);
+  return document.querySelector('#msg').textContent = '';
+};
+
+initialize = function() {
+  var d, date, h, hour, m, time, timelist, y, _i, _results;
+  date = new Date();
+  y = date.getFullYear();
+  m = fillZero(date.getMonth() + 1);
+  d = date.getDate();
+  document.querySelector('#date').value = "" + y + "-" + m + "-" + d;
+  h = fillZero(date.getHours() + 1);
+  m = fillZero(0);
+  document.querySelector('#time_s').value = "" + h + ":" + m;
+  h = fillZero(date.getHours() + 2);
+  document.querySelector('#time_e').value = "" + h + ":" + m;
+  document.querySelector('#name').value = 'Just Test';
+  document.querySelector('#mail').value = 'foo@bar.com';
+  timelist = document.querySelector('#timelist');
+  _results = [];
+  for (hour = _i = 7; _i <= 23; hour = ++_i) {
+    time = document.createElement('option');
+    time.value = fillZero(hour) + ':00';
+    _results.push(timelist.appendChild(time));
+  }
+  return _results;
+};
+
+fillZero = function(value) {
+  if (value < 10) {
+    return '0' + value;
+  } else {
+    return value;
+  }
+};
+
+initialize();
+  </script>
+</div>
