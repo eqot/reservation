@@ -20,8 +20,8 @@ doAction = (event) ->
   params.time_s = time_s.toString()
   params.time_e = time_e.toString()
 
-  for key of params
-    console.log "#{key}, #{params[key]}"
+  # for key of params
+  #   console.log "#{key}, #{params[key]}"
 
   resources = document.querySelector '#resource'
   index = resources.selectedIndex
@@ -30,7 +30,7 @@ doAction = (event) ->
   if isFilled
     google.script.run.withSuccessHandler(onSuccess).withFailureHandler(onFailure).checkData(params)
 
-    document.querySelector('#msg').textContent = '……問い合わせ中……'
+    document.querySelector('#msg').textContent = '……処理中……'
 
 onSuccess = (result) ->
   document.querySelector('#msg').textContent = result
@@ -53,8 +53,8 @@ initialize = ->
   h = fillZero(date.getHours() + 2)
   document.querySelector('#time_e').value = "#{h}:#{m}"
 
-  document.querySelector('#name').value = 'Just Test'
-  document.querySelector('#mail').value = 'foo@bar.com'
+  # document.querySelector('#name').value = 'Just Test'
+  # document.querySelector('#mail').value = 'foo@bar.com'
 
   timelist = document.querySelector '#timelist'
   for hour in [7..23]

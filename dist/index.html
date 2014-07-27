@@ -42,7 +42,7 @@ var IDS, doAction, fillZero, initialize, onFailure, onSuccess;
 IDS = ['date', 'time_s', 'time_e', 'resource', 'name', 'mail'];
 
 doAction = function(event) {
-  var id, index, isFilled, key, params, resources, time_e, time_s, _i, _len;
+  var id, index, isFilled, params, resources, time_e, time_s, _i, _len;
   isFilled = true;
   params = {};
   for (_i = 0, _len = IDS.length; _i < _len; _i++) {
@@ -60,15 +60,12 @@ doAction = function(event) {
   time_e.setMinutes(params.time_e.substr(3, 2));
   params.time_s = time_s.toString();
   params.time_e = time_e.toString();
-  for (key in params) {
-    console.log("" + key + ", " + params[key]);
-  }
   resources = document.querySelector('#resource');
   index = resources.selectedIndex;
   params.resource = resources.options[index].text;
   if (isFilled) {
     google.script.run.withSuccessHandler(onSuccess).withFailureHandler(onFailure).checkData(params);
-    return document.querySelector('#msg').textContent = '……問い合わせ中……';
+    return document.querySelector('#msg').textContent = '……処理中……';
   }
 };
 
@@ -93,8 +90,6 @@ initialize = function() {
   document.querySelector('#time_s').value = "" + h + ":" + m;
   h = fillZero(date.getHours() + 2);
   document.querySelector('#time_e').value = "" + h + ":" + m;
-  document.querySelector('#name').value = 'Just Test';
-  document.querySelector('#mail').value = 'foo@bar.com';
   timelist = document.querySelector('#timelist');
   _results = [];
   for (hour = _i = 7; _i <= 23; hour = ++_i) {
