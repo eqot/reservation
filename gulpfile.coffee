@@ -5,8 +5,8 @@ fs = require 'fs'
 $ = require('gulp-load-plugins')()
 
 paths =
-  scripts: ['*.coffee', '!gulpfile.coffee']
-  html: ['index.html']
+  scripts: ['src/*.coffee']
+  html: ['src/*.html']
 
 gulp.task 'scripts', ->
   return gulp.src paths.scripts
