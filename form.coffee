@@ -1,4 +1,4 @@
-IDS = ['date', 'time_s', 'time_e', 'name', 'mail']
+IDS = ['date', 'time_s', 'time_e', 'resource', 'name', 'mail']
 
 doAction = (event) ->
   isFilled = true
@@ -7,11 +7,25 @@ doAction = (event) ->
   for id in IDS
     params[id] = document.querySelector('#' + id).value
 
-    if id is 'date'
-      params[id] = new Date(params[id]).toString()
-
     if params[id].length is 0
       isFilled = false
+
+  time_s = new Date params.date
+  time_s.setHours params.time_s.substr 0, 2
+  time_s.setMinutes params.time_s.substr 3, 2
+  time_e = new Date params.date
+  time_e.setHours params.time_e.substr 0, 2
+  time_e.setMinutes params.time_e.substr 3, 2
+
+  params.time_s = time_s.toString()
+  params.time_e = time_e.toString()
+
+  for key of params
+    console.log "#{key}, #{params[key]}"
+
+  resources = document.querySelector '#resource'
+  index = resources.selectedIndex
+  params.resource = resources.options[index].text
 
   if isFilled
     google.script.run.withSuccessHandler(onSuccess).withFailureHandler(onFailure).checkData(params)
