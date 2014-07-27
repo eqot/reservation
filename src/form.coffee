@@ -30,7 +30,7 @@ doAction = (event) ->
   if isFilled
     google.script.run.withSuccessHandler(onSuccess).withFailureHandler(onFailure).checkData(params)
 
-    document.querySelector('#msg').textContent = '……問い合わせ中……'
+    document.querySelector('#msg').textContent = '……処理中……'
 
 onSuccess = (result) ->
   document.querySelector('#msg').textContent = result
