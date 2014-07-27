@@ -7,9 +7,6 @@ doAction = (event) ->
   for id in IDS
     params[id] = document.querySelector('#' + id).value
 
-    if id is 'date'
-      params[id] = new Date(params[id]).toString()
-
     if params[id].length is 0
       isFilled = false
 
