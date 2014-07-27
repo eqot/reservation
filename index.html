@@ -11,6 +11,23 @@
           <input type="time" id="time_e" name="time_e" value="" list="timelist" required>
         </td>
       </tr>
+
+      <tr>
+        <td>リソース：</td>
+        <td>
+          <select id="resource" name="resource">
+            <optgroup label="カテゴリ 1">
+              <option>場所 1</option>
+              <option>場所 2</option>
+            </optgroup>
+            <optgroup label="カテゴリ 2">
+              <option>機材 1</option>
+              <option>機材 2</option>
+            </optgroup>
+          </select>
+        </td>
+      </tr>
+
       <tr><td>氏名：</td><td><input type="text" id="name" name="name" required></td></tr>
       <tr><td>メールアドレス：</td><td><input type="text" id="mail" name="mail" required></td></tr>
       <tr><td></td><td><input type="submit" onclick="doAction(e)" value="予約する"></td></tr>

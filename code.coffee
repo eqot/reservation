@@ -7,6 +7,7 @@ checkData = (form) ->
   date = new Date form.date
   time_s = new Date form.time_s
   time_e = new Date form.time_e
+  resource = form.resource
 
   # Logger.log(date)
 
@@ -16,7 +17,7 @@ checkData = (form) ->
   if events.length > 0
     return '先約があるため、予約できませんでした。'
 
-  cal.createEvent name, time_s, time_e,
+  cal.createEvent resource, time_s, time_e,
     description: "#{name} (#{mail})"
     guests: mail
 
