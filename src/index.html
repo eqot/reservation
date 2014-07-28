@@ -1,3 +1,5 @@
+<!-- ver: __VERSION__, time: __TIME_STAMP__ -->
+
 <div>
   <p id="msg">必ず全項目を入力してください。</p>
 
@@ -30,7 +32,13 @@
 
       <tr><td>氏名：</td><td><input type="text" id="name" name="name" required></td></tr>
       <tr><td>メールアドレス：</td><td><input type="text" id="mail" name="mail" required></td></tr>
-      <tr><td></td><td><input type="submit" onclick="doAction(e)" value="予約する"></td></tr>
+      <tr>
+        <td></td>
+        <td>
+          <input type="submit" onclick="doAction(e)" value="予約">
+          <input type="submit" onclick="doDelete(e)" value="削除">
+        </td>
+      </tr>
     </table>
   </form>
 

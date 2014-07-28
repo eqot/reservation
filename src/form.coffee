@@ -1,6 +1,33 @@
 IDS = ['date', 'time_s', 'time_e', 'resource', 'name', 'mail']
 
 doAction = (event) ->
+  params = getParams()
+
+  if params.isFilled
+    google.script.run.withSuccessHandler(onSuccess).withFailureHandler(onFailure).checkData(params)
+
+    document.querySelector('#msg').textContent = '……処理中……'
+
+doDelete = (event) ->
+  params = getParams()
+  params.cmd = 'delete'
+
+  # for key of params
+  #   console.log "#{key}, #{params[key]}"
+
+  if params.isFilled and confirm '本当に削除してもよろしいですか?'
+    google.script.run.withSuccessHandler(onSuccess).withFailureHandler(onFailure).checkData(params)
+
+    document.querySelector('#msg').textContent = '……処理中……'
+
+onSuccess = (result) ->
+  document.querySelector('#msg').textContent = result
+
+onFailure = (error) ->
+  alert(error.message)
+  document.querySelector('#msg').textContent = ''
+
+getParams = ->
   isFilled = true
 
   params = {}
@@ -20,24 +47,13 @@ doAction = (event) ->
   params.time_s = time_s.toString()
   params.time_e = time_e.toString()
 
-  # for key of params
-  #   console.log "#{key}, #{params[key]}"
-
   resources = document.querySelector '#resource'
   index = resources.selectedIndex
   params.resource = resources.options[index].text
 
-  if isFilled
-    google.script.run.withSuccessHandler(onSuccess).withFailureHandler(onFailure).checkData(params)
+  params.isFilled = isFilled
 
-    document.querySelector('#msg').textContent = '……処理中……'
-
-onSuccess = (result) ->
-  document.querySelector('#msg').textContent = result
-
-onFailure = (error) ->
-  alert(error.message)
-  document.querySelector('#msg').textContent = ''
+  return params
 
 initialize = ->
   date = new Date()

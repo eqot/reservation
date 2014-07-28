@@ -1,3 +1,5 @@
+<!-- ver: 0.1.0, time: Tue Jul 29 2014 02:52:03 GMT+0900 (JST) -->
+
 <div>
   <p id="msg">必ず全項目を入力してください。</p>
 
@@ -30,18 +32,52 @@
 
       <tr><td>氏名：</td><td><input type="text" id="name" name="name" required></td></tr>
       <tr><td>メールアドレス：</td><td><input type="text" id="mail" name="mail" required></td></tr>
-      <tr><td></td><td><input type="submit" onclick="doAction(e)" value="予約する"></td></tr>
+      <tr>
+        <td></td>
+        <td>
+          <input type="submit" onclick="doAction(e)" value="予約">
+          <input type="submit" onclick="doDelete(e)" value="削除">
+        </td>
+      </tr>
     </table>
   </form>
 
   <datalist id="timelist"></datalist>
 
   <script>
-var IDS, doAction, fillZero, initialize, onFailure, onSuccess;
+var IDS, doAction, doDelete, fillZero, getParams, initialize, onFailure, onSuccess;
 
 IDS = ['date', 'time_s', 'time_e', 'resource', 'name', 'mail'];
 
 doAction = function(event) {
+  var params;
+  params = getParams();
+  if (params.isFilled) {
+    google.script.run.withSuccessHandler(onSuccess).withFailureHandler(onFailure).checkData(params);
+    return document.querySelector('#msg').textContent = '……処理中……';
+  }
+};
+
+doDelete = function(event) {
+  var params;
+  params = getParams();
+  params.cmd = 'delete';
+  if (params.isFilled && confirm('本当に削除してもよろしいですか?')) {
+    google.script.run.withSuccessHandler(onSuccess).withFailureHandler(onFailure).checkData(params);
+    return document.querySelector('#msg').textContent = '……処理中……';
+  }
+};
+
+onSuccess = function(result) {
+  return document.querySelector('#msg').textContent = result;
+};
+
+onFailure = function(error) {
+  alert(error.message);
+  return document.querySelector('#msg').textContent = '';
+};
+
+getParams = function() {
   var id, index, isFilled, params, resources, time_e, time_s, _i, _len;
   isFilled = true;
   params = {};
@@ -63,19 +99,8 @@ doAction = function(event) {
   resources = document.querySelector('#resource');
   index = resources.selectedIndex;
   params.resource = resources.options[index].text;
-  if (isFilled) {
-    google.script.run.withSuccessHandler(onSuccess).withFailureHandler(onFailure).checkData(params);
-    return document.querySelector('#msg').textContent = '……処理中……';
-  }
-};
-
-onSuccess = function(result) {
-  return document.querySelector('#msg').textContent = result;
-};
-
-onFailure = function(error) {
-  alert(error.message);
-  return document.querySelector('#msg').textContent = '';
+  params.isFilled = isFilled;
+  return params;
 };
 
 initialize = function() {
