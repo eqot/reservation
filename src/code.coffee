@@ -1,3 +1,6 @@
+version = '__VERSION__'
+time = '__TIME_STAMP__'
+
 doGet = (e) ->
   return HtmlService.createHtmlOutputFromFile 'index'
 
