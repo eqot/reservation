@@ -1,4 +1,8 @@
-var addEvent, checkData, doGet, removeEvent;
+var addEvent, checkData, doGet, removeEvent, time, version;
+
+version = '0.1.0';
+
+time = 'Tue Jul 29 2014 02:52:03 GMT+0900 (JST)';
 
 doGet = function(e) {
   return HtmlService.createHtmlOutputFromFile('index');
